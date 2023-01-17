@@ -6,28 +6,51 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:31:43 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/01/14 18:09:31 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:41:59 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int x = 0;
-
-void	*routinee()
+void	*philo()
 {
-	for (int i = 0; i < 2000000000; i++)
-		x++;
+	
 }
 
 int	main(int argc, char **argv)
 {
-	pthread_t	t1, t2;
-	pthread_create(&t1, NULL, &routinee, NULL);
-	pthread_join(t1, NULL);
-	pthread_create(&t2, NULL, &routinee, NULL);
-	pthread_join(t2, NULL);
-	printf("x == %lu\n", t1);
-	// if (check_errors(argc, argv))
-	// 	return (1);
+	int				i;
+	pthread_t		philosophers[ft_atoi(argv[1])];
+	pthread_mutex_t	forks[ft_atoi(argv[1])];
+
+	i = 0;
+	check_errors(argc, argv);
+	while (i < ft_atoi(argv[1]))
+	{
+		if (pthread_mutex_init(&forks[i++], NULL) != 0)
+			ft_putstr_fd("Error\n", 2);
+		i++;
+	}
+	i = 0;
+	while (i < ft_atoi(argv[1]))
+	{
+		if (pthread_create(&philosophers[i], NULL, &philo, NULL) != 0)
+			ft_putstr_fd("Error\n", 2);
+		i++;
+	}
+	i = 0;
+	while (i < ft_atoi(argv[1]))
+	{
+		if (pthread_join(&philosophers[i], NULL) != 0)
+			ft_putstr_fd("Error\n", 2);
+		i++;
+	}
+	i = 0;
+	while (i < ft_atoi(argv[1]))
+	{
+		if (pthread_mutex_destroy(&forks[i]) != 0)
+			ft_putstr_fd("Error\n", 2);
+		i++;
+	}
+	return (0);
 }
