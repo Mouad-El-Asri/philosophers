@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 15:36:18 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/01/21 19:56:23 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:14:31 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	stucts_init(t_vars *args, char **argv)
 {
 	int	i;
 
+	i = 0;
 	args->philosopher_num = ft_atoi(argv[1]);
 	args->time_to_die = ft_atoi(argv[2]);
 	args->time_to_eat = ft_atoi(argv[3]);
@@ -24,17 +25,19 @@ void	stucts_init(t_vars *args, char **argv)
 					sizeof(t_philosopher));
 	args->forks = (pthread_mutex_t *)malloc(args->philosopher_num * \
 					sizeof(pthread_mutex_t));
-	i = 0;
+	if (argv[5])
+		args->meals_number = ft_atoi(argv[5]);
 	while (i < args->philosopher_num)
 	{
 		args->philosophers[i].id = i + 1;
 		args->philosophers[i].last_meal = get_time_in_ms();
-		args->philosophers[i].right_fork = i;
+		args->philosophers[i].rfork = i;
 		if (i + 1 == args->philosopher_num)
-			args->philosophers[i].left_fork = 0;
+			args->philosophers[i].lfork = 0;
 		else
-			args->philosophers[i].left_fork = i + 1;
+			args->philosophers[i].lfork = i + 1;
 		args->philosophers[i].args = args;
+		args->philosophers[i].meals_eaten = 0;
 		i++;
 	}
 }
