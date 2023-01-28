@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_death.c                                      :+:      :+:    :+:   */
+/*   check_death_and_meals.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 19:27:54 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/01/28 16:02:06 by moel-asr         ###   ########.fr       */
+/*   Created: 2023/01/27 22:11:15 by moel-asr          #+#    #+#             */
+/*   Updated: 2023/01/27 22:17:08 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	check_death(t_vars *args)
+int	check_death_and_meals(t_vars *args, int argc)
 {
-	int	i;
-
-	i = 0;
-	while (i < args->philosopher_num)
+	if (check_death(args) == 0)
 	{
-		if (pthread_mutex_lock(&args->last_meal) != 0)
-			print_errors(9);
-		if (get_time_in_ms() - args->philosophers[i].last_meal >= \
-			args->time_to_die)
+		free(args->philosophers);
+		free(args->forks);
+		return (0);
+	}
+	if (argc == 6)
+	{
+		if (check_meals_eaten(args) == 0)
 		{
-			if (pthread_mutex_lock(&args->log_message) != 0)
-				print_errors(9);
-			log_message(&args->philosophers[i], "died");
+			free(args->philosophers);
+			free(args->forks);
 			return (0);
 		}
-		if (pthread_mutex_unlock(&args->last_meal) != 0)
-			print_errors(10);
-		i++;
 	}
+	usleep(50);
 	return (1);
 }

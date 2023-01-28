@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 15:36:18 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/01/25 19:14:31 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/01/27 22:18:28 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	stucts_init(t_vars *args, char **argv)
 		else
 			args->philosophers[i].lfork = i + 1;
 		args->philosophers[i].args = args;
-		args->philosophers[i].meals_eaten = 0;
-		i++;
+		args->philosophers[i++].meals_eaten = 0;
 	}
 }

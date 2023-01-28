@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:32:00 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/01/27 00:02:40 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/01/28 16:49:26 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_vars
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi(const char *str);
+int		check_death_and_meals(t_vars *args, int argc);
 int		check_death(t_vars *args);
 int		check_errors(int argc, char **argv);
 int		check_meals_eaten(t_vars *args);
@@ -62,7 +63,6 @@ void	mutex_log_message(char *str, t_philosopher	*philosopher);
 void	mutex_meals_eaten(t_philosopher	*philosopher);
 int		print_errors(int err_num);
 void	stucts_init(t_vars *args, char **argv);
-
-void	*philo(void *philo);
+void	*routine(void *philo);
 
 #endif
