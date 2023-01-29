@@ -3,11 +3,13 @@
 ## Description
 This project simulates the classic problem of the philosophers dining table, where a group of philosophers are sitting around a table and are trying to eat. The problem is that there are only a limited number of forks available, and each philosopher needs two forks to eat. This project is implemented in C and uses pthreads to create a concurrent solution to the problem.
 
+![dining philosophers problem image](./dining_philosophers_problem.png)
+
 ## Requirements
 - C compiler (gcc, etc...)
 - Make
 
-## Cloning, compiling and Running
+## Cloning, compiling and running
 Clone the repository to your local machine
 
 ```git clone``` ```https://github.com/Mouad-El-Asri/philosophers.git```
@@ -28,7 +30,7 @@ The program takes in four mandatory command line arguments and one optional argu
 
 This command is running the "philo" program with 5 philosopher threads, 800 milliseconds for the time to die, 200 milliseconds for the time to eat, 200 milliseconds for the time to sleep, and 7 as an argument for the number of times each philosopher should eat before the simulation stops.
 
-### Screenshot
+## Screenshot
 
 ![philosophers execution example](./philosophers_execution.png)
 
